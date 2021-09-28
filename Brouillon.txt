@@ -1,0 +1,31 @@
+        <?php
+        $matchsPremierTourA = $viewChampionsL->matchByPhase(1, 'Premier Tour');
+        $matchsPremierTourB = $viewChampionsL->matchByPhase(2, 'Premier Tour');
+        
+        foreach ($matchsPremierTourA as $key => $match) {
+        
+        ?>
+        
+        <div class = "matchs">
+
+            <div class="equipe1">
+                <img class="drapeau" src=<?= $lien . $matchsPremierTourA[$key]->equipe1->drapeau_equipes ?> alt="">
+                <?= $matchsPremierTourA[$key]->equipe1->nom_equipes ?>
+            </div>
+
+                <div>
+                    <img class="vs" src="./assets/img/vs.png" alt="">
+                </div>
+               
+            <div class="equipe2">
+                <img class="drapeau" src=<?= $lien . $matchsPremierTourA[$key]->equipe2->drapeau_equipes ?> alt="">
+                <?= $matchsPremierTourA[$key]->equipe2->nom_equipes ?>
+            </div>
+
+        </div>
+
+    <?php
+        }
+    }
+
+    ?>
