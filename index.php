@@ -124,19 +124,51 @@ $lien = './assets/img/';
         <?php
         $matchsPremierTourA = $viewChampionsL->matchByPhase(1, 'Premier Tour');
         $matchsPremierTourB = $viewChampionsL->matchByPhase(2, 'Premier Tour');
-        
-        foreach ($matchsPremierTourA as $key => $match) {
-        
         ?>
-        
-        
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>GROUPE A</th>
+                    <th>AFFICHES</th>
+                    <th>SCORE</th>
+                </tr>
+            </thead>
 
-    <?php
-        }
-    }
+            <tbody>
 
-    ?>
+                <?php
+                foreach ($matchsPremierTourA as $key => $match) {
+                ?>
+                    <tr>
+                        <td>
+                            <?= 'Match ' . $key+1 ?>
+                        </td>
+                    </tr>
 
+                    <tr>
+                        <td>
+                            <img class="drapeau" src=<?= $lien . $matchsPremierTourA[$key]->equipe1->drapeau_equipes ?> alt="">
+                            <?= $matchsPremierTourA[$key]->equipe1->nom_equipes ?>
+                        </td>
+                    
+                        <td>
+                            <img class="drapeau" src=<?= $lien . $matchsPremierTourA[$key]->equipe2->drapeau_equipes ?> alt="">
+                            <?= $matchsPremierTourA[$key]->equipe2->nom_equipes ?>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>
+                            <?=$key+1 ?>
+                        </td>
+                    </tr>
+            <?php
+                }
+            }
+
+            ?>
+            </tbody>
+        </table>
 
 </body>
 
