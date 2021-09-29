@@ -161,7 +161,7 @@ $lien = './assets/img/';
                 ?>
                     <tr>
                         <td>
-                            <?= ' Match  ' . $key + 1 ?>
+                            <?= ' Match  ' . $matchsPremierTourA[$key]->idMatch ?>
                         </td>
 
                         <td class="blockEq">
@@ -197,9 +197,12 @@ $lien = './assets/img/';
 
                     </tr>
                 <?php
-                $v = $key+1;
+               
+                    // updateMatchJouer($matchsPremierTourA[$key]->idMatch, $matchsPremierTourA[$key]->equipe1->id);
+                    // echo '<pre>'; 
+                    // print_r( $matchsPremierTourA[$key]->equipe1->id_equipes);
+                   
                 }
-
                 ?>
             </tbody>
         </table>
@@ -221,7 +224,7 @@ $lien = './assets/img/';
                 ?>
                     <tr>
                         <td>
-                            <?= ' Match  ' . ($v + $key)+1 ?>
+                            <?= ' Match  ' . $matchsPremierTourB[$key]->idMatch ?>
                         </td>
 
                         <td class="blockEq">
