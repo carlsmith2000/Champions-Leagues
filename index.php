@@ -115,17 +115,37 @@ $lien = './assets/img/';
 
                     <?php
                     }
+
                     ?>
 
                 </tbody>
             </table>
 
         </div>
-        <?php
-        $matchsPremierTourA = $viewChampionsL->matchByPhase(1, 'Premier Tour');
-        $matchsPremierTourB = $viewChampionsL->matchByPhase(2, 'Premier Tour');
-        ?>
-        <table border="1">
+        
+        <div>
+            <form action="index.php" method="POST">
+                <input type="submit" value="Afficher Les Matchs" name="afficherMatch">
+            </form>
+        </div>
+
+    <?php
+    }
+    $matchsPremierTourA = $viewChampionsL->matchByPhase(1, 'Premier Tour');
+    $matchsPremierTourB = $viewChampionsL->matchByPhase(2, 'Premier Tour');
+
+    ?>
+
+
+
+    <?php
+
+
+    if (isset($_POST['afficherMatch'])) {
+
+    ?>
+
+        <table>
             <thead>
                 <tr>
                     <th>GROUPE A</th>
@@ -141,35 +161,110 @@ $lien = './assets/img/';
                 ?>
                     <tr>
                         <td>
-                            <?= 'Match ' . $key+1 ?>
+                            <?= ' Match  ' . $key + 1 ?>
                         </td>
-                    </tr>
 
-                    <tr>
-                        <td>
-                            <img class="drapeau" src=<?= $lien . $matchsPremierTourA[$key]->equipe1->drapeau_equipes ?> alt="">
-                            <?= $matchsPremierTourA[$key]->equipe1->nom_equipes ?>
-                        </td>
-                    
-                        <td>
-                            <img class="drapeau" src=<?= $lien . $matchsPremierTourA[$key]->equipe2->drapeau_equipes ?> alt="">
-                            <?= $matchsPremierTourA[$key]->equipe2->nom_equipes ?>
-                        </td>
-                    </tr>
+                        <td class="blockEq">
+                            <div class="blockEquipe">
+                                <div class="drapeauEtNom">
+                                    <img class="drapeau" src=<?= $lien . $matchsPremierTourA[$key]->equipe1->drapeau_equipes ?> alt="">
+                                    <?= $matchsPremierTourA[$key]->equipe1->nom_equipes ?>
+                                </div>
 
-                    <tr>
-                        <td>
-                            <?=$key+1 ?>
+                                <div>
+                                    <img class="vs" src="./assets/img/vs.png" alt="">
+                                </div>
+
+                                <div class="drapeauEtNom">
+                                    <img class="drapeau" src=<?= $lien . $matchsPremierTourA[$key]->equipe2->drapeau_equipes ?> alt="">
+                                    <?= $matchsPremierTourA[$key]->equipe2->nom_equipes ?>
+                                </div>
+
+                            </div>
                         </td>
+
+
+                        <td>
+                            <form action="">
+                                <div>
+                                    <input class="scoreEquipe" type="number" name="scoreEquipe1" size="2">
+                                    <input class="scoreEquipe" type="number" name="scoreEquipe2" size="2">
+                                    <input class="btnJouer" type="submit" name="jouerMatch" value="Jouer">
+                                </div>
+
+                            </form>
+                        </td>
+
                     </tr>
-            <?php
+                <?php
+                $v = $key+1;
                 }
-            }
 
-            ?>
+                ?>
             </tbody>
         </table>
 
+
+        <table>
+            <thead>
+                <tr>
+                    <th>GROUPE B</th>
+                    <th>AFFICHES</th>
+                    <th>SCORE</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                <?php
+                foreach ($matchsPremierTourB as $key => $match) {
+                ?>
+                    <tr>
+                        <td>
+                            <?= ' Match  ' . ($v + $key)+1 ?>
+                        </td>
+
+                        <td class="blockEq">
+                            <div class="blockEquipe">
+                                <div class="drapeauEtNom">
+                                    <img class="drapeau" src=<?= $lien . $matchsPremierTourB[$key]->equipe1->drapeau_equipes ?> alt="">
+                                    <?= $matchsPremierTourB[$key]->equipe1->nom_equipes ?>
+                                </div>
+
+                                <div>
+                                    <img class="vs" src="./assets/img/vs.png" alt="">
+                                </div>
+
+                                <div class="drapeauEtNom">
+                                    <img class="drapeau" src=<?= $lien . $matchsPremierTourB[$key]->equipe2->drapeau_equipes ?> alt="">
+                                    <?= $matchsPremierTourB[$key]->equipe2->nom_equipes ?>
+                                </div>
+
+                            </div>
+                        </td>
+
+
+                        <td>
+                            <form action="">
+                                <div>
+                                    <input class="scoreEquipe" type="number" name="scoreEquipe1" size="2">
+                                    <input class="scoreEquipe" type="number" name="scoreEquipe2" size="2">
+                                    <input class="btnJouer" type="submit" name="jouerMatch" value="Jouer">
+                                </div>
+
+                            </form>
+                        </td>
+
+                    </tr>
+                <?php
+                }
+
+                ?>
+            </tbody>
+        </table>
+    <?php
+    }
+    ?>
 </body>
 
 </html>
