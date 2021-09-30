@@ -122,7 +122,7 @@ $lien = './assets/img/';
             </table>
 
         </div>
-        
+
         <div>
             <form action="index.php" method="POST">
                 <input type="submit" value="Afficher Les Matchs" name="afficherMatch">
@@ -185,10 +185,10 @@ $lien = './assets/img/';
 
 
                         <td>
-                            <form action="">
+                            <form action="index.php" method="POST">
                                 <div>
-                                    <input class="scoreEquipe" type="number" name="scoreEquipe1" size="2">
-                                    <input class="scoreEquipe" type="number" name="scoreEquipe2" size="2">
+                                    <input class="scoreEquipe" type="number" name="scoreEquipe1" min = 0 max = 25 >
+                                    <input class="scoreEquipe" type="number" name="scoreEquipe2" min= 0 max = 25 >
                                     <input class="btnJouer" type="submit" name="jouerMatch" value="Jouer">
                                 </div>
 
@@ -197,11 +197,12 @@ $lien = './assets/img/';
 
                     </tr>
                 <?php
-               
-                    // updateMatchJouer($matchsPremierTourA[$key]->idMatch, $matchsPremierTourA[$key]->equipe1->id);
-                    // echo '<pre>'; 
-                    // print_r( $matchsPremierTourA[$key]->equipe1->id_equipes);
-                   
+                }
+                if (isset($_POST['jouerMatch']) ) {                        
+                    $controlerChampionsL->updateMatchJouer($matchsPremierTourA[2]->idMatch,
+                       $_POST['scoreEquipe1'],
+                       $_POST['scoreEquipe2']
+                    );
                 }
                 ?>
             </tbody>

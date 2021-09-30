@@ -93,4 +93,10 @@ class ModelChampionsLeagues extends dataBase
             }
         }
     }
+
+    protected function updateMatch($idMatch, $scoreEquipe1, $scoreEquipe2){
+        $sql = 'UPDATE matchs SET scoreEq1_matchs  = ?, scoreEq2_matchs = ? WHERE id_matchs = ?';
+        $stm = $this->getConnectionToBD()->prepare($sql);
+        $stm->execute([$scoreEquipe1, $scoreEquipe2, $idMatch]);
+    }
 }

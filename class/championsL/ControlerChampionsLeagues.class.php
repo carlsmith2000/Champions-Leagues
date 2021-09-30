@@ -31,5 +31,7 @@ class ControlerChampionsLeagues extends ModelChampionsLeagues
     public function createMatchs(){
         $this->updateIdMatchPremierTour();
     }
-
+    public function updateMatchJouer($idMatch, $scoreEquipe1, $scoreEquipe2){
+        return $this->updateMatch($idMatch, $scoreEquipe1, $scoreEquipe2);
+    }
 }

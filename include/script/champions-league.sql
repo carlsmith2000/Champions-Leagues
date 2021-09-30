@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Sep 19, 2021 at 10:00 AM
+-- Generation Time: Sep 30, 2021 at 10:43 AM
 -- Server version: 10.4.19-MariaDB
 -- PHP Version: 8.0.7
 
@@ -49,14 +49,14 @@ CREATE TABLE `equipes` (
 --
 
 INSERT INTO `equipes` (`id_equipes`, `nom_equipes`, `drapeau_equipes`, `butEnc_equipes`, `butMarq_equipes`, `point_equipes`, `diffBut_equipes`, `matchNull_equipes`, `id_groupe`, `id_lots_eq`, `MatchGagne_equipes`, `MatchPerdu_equipes`, `matchJouer_equipe`, `testQalifie`) VALUES
-(1, 'Brésil', 'bresil.svg', NULL, NULL, 0, NULL, NULL, NULL, 1, 0, 0, 0, 0),
-(2, 'France', 'france.svg', NULL, NULL, 0, NULL, NULL, NULL, 2, 0, 0, 0, 0),
-(3, 'Espagne', 'espagne.svg', NULL, NULL, 0, NULL, NULL, NULL, 3, 0, 0, 0, 0),
-(4, 'Portugal', 'portugal.svg', NULL, NULL, 0, NULL, NULL, NULL, 4, 0, 0, 0, 0),
-(5, 'Argentine', 'argentine.svg', NULL, NULL, 0, NULL, NULL, NULL, 1, 0, 0, 0, 0),
-(6, 'Italie', 'italie.svg', NULL, NULL, 0, NULL, NULL, NULL, 2, 0, 0, 0, 0),
-(7, 'Allemagne', 'allemagne', NULL, NULL, 0, NULL, NULL, NULL, 3, 0, 0, 0, 0),
-(8, 'Haïti', 'haiti.svg', NULL, NULL, 0, NULL, NULL, NULL, 4, 0, 0, 0, 0);
+(1, 'Brésil', 'bresil.svg', NULL, NULL, 0, NULL, NULL, 2, 1, 0, 0, 0, 0),
+(2, 'France', 'france.svg', NULL, NULL, 0, NULL, NULL, 2, 2, 0, 0, 0, 0),
+(3, 'Espagne', 'espagne.svg', NULL, NULL, 0, NULL, NULL, 1, 3, 0, 0, 0, 0),
+(4, 'Portugal', 'portugal.svg', NULL, NULL, 0, NULL, NULL, 2, 4, 0, 0, 0, 0),
+(5, 'Argentine', 'argentine.svg', NULL, NULL, 0, NULL, NULL, 1, 1, 0, 0, 0, 0),
+(6, 'Italie', 'italie.svg', NULL, NULL, 0, NULL, NULL, 1, 2, 0, 0, 0, 0),
+(7, 'Allemagne', 'allemagne.svg', NULL, NULL, 0, NULL, NULL, 2, 3, 0, 0, 0, 0),
+(8, 'Haïti', 'haiti.svg', NULL, NULL, 0, NULL, NULL, 1, 4, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
@@ -116,8 +116,9 @@ INSERT INTO `lots_eq` (`id_lots_eq`) VALUES
 
 CREATE TABLE `matchs` (
   `id_matchs` int(11) NOT NULL,
-  `idEq2_matchs` int(250) DEFAULT NULL,
+  `idGroupe` int(11) NOT NULL,
   `idEq1_matchs` int(250) DEFAULT NULL,
+  `idEq2_matchs` int(250) DEFAULT NULL,
   `scoreEq1_matchs` int(5) DEFAULT NULL,
   `scoreEq2_matchs` int(5) DEFAULT NULL,
   `siJouer_matchs` tinyint(1) DEFAULT NULL,
@@ -134,23 +135,23 @@ CREATE TABLE `matchs` (
 -- Dumping data for table `matchs`
 --
 
-INSERT INTO `matchs` (`id_matchs`, `idEq2_matchs`, `idEq1_matchs`, `scoreEq1_matchs`, `scoreEq2_matchs`, `siJouer_matchs`, `phase_matchs`, `position_eq_1`, `position_eq_2`, `eq_p`, `eq_g`, `matchs_termine`, `match_num`) VALUES
-(1, NULL, NULL, NULL, NULL, 1, 'Premier Tour', 1, 2, 0, 0, 0, 1),
-(2, NULL, NULL, NULL, NULL, 0, 'Premier Tour', 3, 4, 0, 0, 0, 3),
-(3, NULL, NULL, NULL, NULL, 0, 'Premier Tour', 1, 3, 0, 0, 0, 5),
-(4, NULL, NULL, NULL, NULL, 0, 'Premier Tour', 2, 4, 0, 0, 0, 7),
-(5, NULL, NULL, NULL, NULL, 0, 'Premier Tour', 1, 4, 0, 0, 0, 9),
-(6, NULL, NULL, NULL, NULL, 0, 'Premier Tour', 2, 3, 0, 0, 0, 11),
-(7, NULL, NULL, NULL, NULL, 0, 'Premier Tour', 1, 2, 0, 0, 0, 2),
-(8, NULL, NULL, NULL, NULL, 0, 'Premier Tour', 3, 4, 0, 0, 0, 4),
-(9, NULL, NULL, NULL, NULL, 0, 'Premier Tour', 1, 3, 0, 0, 0, 6),
-(10, NULL, NULL, NULL, NULL, 0, 'Premier Tour', 2, 4, 0, 0, 0, 8),
-(11, NULL, NULL, NULL, NULL, 0, 'Premier Tour', 1, 4, 0, 0, 0, 10),
-(12, NULL, NULL, NULL, NULL, 0, 'Premier Tour', 2, 3, 0, 0, 0, 12),
-(13, NULL, NULL, NULL, NULL, 0, 'Demi Finale', 1, 2, 0, 0, 0, 13),
-(14, NULL, NULL, NULL, NULL, 0, 'Demi Finale', 1, 2, 0, 0, 0, 14),
-(15, NULL, NULL, NULL, NULL, 0, 'Petite Finale', 2, 2, 0, 0, 0, 15),
-(16, NULL, NULL, NULL, NULL, 0, 'Grande Finale', 1, 1, 0, 0, 0, 16);
+INSERT INTO `matchs` (`id_matchs`, `idGroupe`, `idEq1_matchs`, `idEq2_matchs`, `scoreEq1_matchs`, `scoreEq2_matchs`, `siJouer_matchs`, `phase_matchs`, `position_eq_1`, `position_eq_2`, `eq_p`, `eq_g`, `matchs_termine`, `match_num`) VALUES
+(1, 1, 5, 6, NULL, NULL, 0, 'Premier Tour', 1, 2, 0, 0, 0, 1),
+(2, 1, 3, 8, NULL, NULL, 0, 'Premier Tour', 3, 4, 0, 0, 0, 3),
+(3, 1, 5, 3, NULL, NULL, 0, 'Premier Tour', 1, 3, 0, 0, 0, 5),
+(4, 1, 6, 8, NULL, NULL, 0, 'Premier Tour', 2, 4, 0, 0, 0, 7),
+(5, 1, 5, 8, NULL, NULL, 0, 'Premier Tour', 1, 4, 0, 0, 0, 9),
+(6, 1, 6, 3, NULL, NULL, 0, 'Premier Tour', 2, 3, 0, 0, 0, 11),
+(7, 2, 1, 2, NULL, NULL, 0, 'Premier Tour', 1, 2, 0, 0, 0, 2),
+(8, 2, 7, 4, NULL, NULL, 0, 'Premier Tour', 3, 4, 0, 0, 0, 4),
+(9, 2, 1, 7, NULL, NULL, 0, 'Premier Tour', 1, 3, 0, 0, 0, 6),
+(10, 2, 2, 4, NULL, NULL, 0, 'Premier Tour', 2, 4, 0, 0, 0, 8),
+(11, 2, 1, 4, NULL, NULL, 0, 'Premier Tour', 1, 4, 0, 0, 0, 10),
+(12, 2, 2, 7, NULL, NULL, 0, 'Premier Tour', 2, 3, 0, 0, 0, 12),
+(13, 0, NULL, NULL, NULL, NULL, 0, 'Demi Finale', 1, 2, 0, 0, 0, 13),
+(14, 0, NULL, NULL, NULL, NULL, 0, 'Demi Finale', 1, 2, 0, 0, 0, 14),
+(15, 0, NULL, NULL, NULL, NULL, 0, 'Petite Finale', 2, 2, 0, 0, 0, 15),
+(16, 0, NULL, NULL, NULL, NULL, 0, 'Grande Finale', 1, 1, 0, 0, 0, 16);
 
 --
 -- Indexes for dumped tables
