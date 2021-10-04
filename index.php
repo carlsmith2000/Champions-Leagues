@@ -77,12 +77,11 @@ $lien = './assets/img/';
         $controlerChampionsL->createGroupe();
 
         // BOUTTON PERMETTANT DE JOUER UN MATCH
-
-        if (isset($_POST['jouerMatch'])) {
-            $controlerChampionsL->updateMatchJouer($_POST['idMatch'], $_POST['scoreEquipe1'], $_POST['scoreEquipe2']);
-            // echo "<pre>";
-            // print_r($_POST);
-        }
+    }
+    if (isset($_POST['jouerMatch'])) {
+        $controlerChampionsL->updateMatchJouer($_POST['idMatch'], $_POST['scoreEquipe1'], $_POST['scoreEquipe2']);
+        // echo "ooooooooooooooooook";
+        // print_r($_POST);
     }
 
     if (isset($_POST['resetChamp'])) {
@@ -139,29 +138,10 @@ $lien = './assets/img/';
 
         </div>
 
-        <?php
+    <?php
 
-        if ($controlerChampionsL->testForAffMatch() == true) {
-            $controlerChampionsL->createMatchs();
-
-        ?>
-            <div>
-                <form action="index.php" method="POST">
-                    <input type="submit" value="Afficher Matchs" name="afficherMatch">
-                </form>
-            </div>
-        <?php
-        } else {
-        ?>
-            <div>
-                <form action="index.php" method="POST">
-                    <input type="submit" value="Afficher Matchs" name="afficherMatch" disabled>
-                </form>
-            </div>
-        <?php
-        }
     } else {
-        ?>
+    ?>
         <!-- Boutton Permettant de lancer un tirage -->
         <div>
             <form action="index.php" method="POST">
@@ -176,136 +156,129 @@ $lien = './assets/img/';
 
     <?php
 
-    if (isset($_POST['afficherMatch'])) {
-
-        $matchsPremierTourA = $viewChampionsL->matchByPhase(1, 'Premier Tour');
-        $matchsPremierTourB = $viewChampionsL->matchByPhase(2, 'Premier Tour');
+    $matchsPremierTourA = $viewChampionsL->matchByPhase(1, 'Premier Tour');
+    $matchsPremierTourB = $viewChampionsL->matchByPhase(2, 'Premier Tour');
 
     ?>
-        <!-- LES MATCHS DU GROUPE A -->
-        <table>
-            <thead>
+    <!-- LES MATCHS DU GROUPE A -->
+    <table>
+        <thead>
+            <tr>
+                <th>GROUPE A</th>
+                <th>AFFICHES</th>
+                <th>SCORE</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            <?php
+            foreach ($matchsPremierTourA as $key => $match) {
+            ?>
                 <tr>
-                    <th>GROUPE A</th>
-                    <th>AFFICHES</th>
-                    <th>SCORE</th>
-                </tr>
-            </thead>
+                    <td>
+                        <?= ' Match  ' . $matchsPremierTourA[$key]->idMatch ?>
+                    </td>
 
-            <tbody>
-
-                <?php
-                foreach ($matchsPremierTourA as $key => $match) {
-                ?>
-                    <tr>
-                        <td>
-                            <?= ' Match  ' . $matchsPremierTourA[$key]->idMatch ?>
-                        </td>
-
-                        <td class="blockEq">
-                            <div class="blockEquipe">
-                                <div class="drapeauEtNom">
-                                    <img class="drapeau" src=<?= $lien . $matchsPremierTourA[$key]->equipe1->drapeau_equipes ?> alt="">
-                                    <?= $matchsPremierTourA[$key]->equipe1->nom_equipes ?>
-                                </div>
-
-                                <div>
-                                    <img class="vs" src="./assets/img/vs.png" alt="">
-                                </div>
-
-                                <div class="drapeauEtNom">
-                                    <img class="drapeau" src=<?= $lien . $matchsPremierTourA[$key]->equipe2->drapeau_equipes ?> alt="">
-                                    <?= $matchsPremierTourA[$key]->equipe2->nom_equipes ?>
-                                </div>
-
+                    <td class="blockEq">
+                        <div class="blockEquipe">
+                            <div class="drapeauEtNom">
+                                <img class="drapeau" src=<?= $lien . $matchsPremierTourA[$key]->equipe1->drapeau_equipes ?> alt="">
+                                <?= $matchsPremierTourA[$key]->equipe1->nom_equipes ?>
                             </div>
-                        </td>
+
+                            <div>
+                                <img class="vs" src="./assets/img/vs.png" alt="">
+                            </div>
+
+                            <div class="drapeauEtNom">
+                                <img class="drapeau" src=<?= $lien . $matchsPremierTourA[$key]->equipe2->drapeau_equipes ?> alt="">
+                                <?= $matchsPremierTourA[$key]->equipe2->nom_equipes ?>
+                            </div>
+
+                        </div>
+                    </td>
 
 
-                        <td>
-                            <form action="index.php" method="POST">
-                                <div>
-                                    <input class="scoreEquipe" type="hidden" name="idMatch" value=<?= $matchsPremierTourA[$key]->idMatch ?>>
-                                    <input class="scoreEquipe" type="number" name="scoreEquipe1" min=0 max=25 required value=<?= $matchsPremierTourA[$key]->scoreEquipe1 ?>>
-                                    <input class="scoreEquipe" type="number" name="scoreEquipe2" min=0 max=25 required value=<?= $matchsPremierTourA[$key]->scoreEquipe2 ?>>
-                                    <input class="btnJouer" type="submit" name="jouerMatch" value="Jouer">
-                                </div>
+                    <td>
+                        <form action="index.php" method="POST">
+                            <div>
+                                <input class="scoreEquipe" type="hidden" name="idMatch" value=<?= $matchsPremierTourA[$key]->idMatch ?>>
+                                <input class="scoreEquipe" type="number" name="scoreEquipe1" min=0 max=25 required value=<?= $matchsPremierTourA[$key]->scoreEquipe1 ?>>
+                                <input class="scoreEquipe" type="number" name="scoreEquipe2" min=0 max=25 required value=<?= $matchsPremierTourA[$key]->scoreEquipe2 ?>>
+                                <input class="btnJouer" type="submit" name="jouerMatch" value="Jouer">
+                            </div>
 
-                            </form>
-                        </td>
+                        </form>
+                    </td>
 
-                    </tr>
-                <?php
-                }
-                ?>
-            </tbody>
-        </table>
+                </tr>
+            <?php
+            }
+            ?>
+        </tbody>
+    </table>
 
-        <!-- LES MATCHS DU GROUPE B -->
+    <!-- LES MATCHS DU GROUPE B -->
 
-        <table>
-            <thead>
+    <table>
+        <thead>
+            <tr>
+                <th>GROUPE B</th>
+                <th>AFFICHES</th>
+                <th>SCORE</th>
+            </tr>
+        </thead>
+
+        <tbody>
+
+            <?php
+            foreach ($matchsPremierTourB as $key => $match) {
+            ?>
                 <tr>
-                    <th>GROUPE B</th>
-                    <th>AFFICHES</th>
-                    <th>SCORE</th>
-                </tr>
-            </thead>
+                    <td>
+                        <?= ' Match  ' . $matchsPremierTourB[$key]->idMatch ?>
+                    </td>
 
-            <tbody>
-
-                <?php
-                foreach ($matchsPremierTourB as $key => $match) {
-                ?>
-                    <tr>
-                        <td>
-                            <?= ' Match  ' . $matchsPremierTourB[$key]->idMatch ?>
-                        </td>
-
-                        <td class="blockEq">
-                            <div class="blockEquipe">
-                                <div class="drapeauEtNom">
-                                    <img class="drapeau" src=<?= $lien . $matchsPremierTourB[$key]->equipe1->drapeau_equipes ?> alt="">
-                                    <?= $matchsPremierTourB[$key]->equipe1->nom_equipes ?>
-                                </div>
-
-                                <div>
-                                    <img class="vs" src="./assets/img/vs.png" alt="">
-                                </div>
-
-                                <div class="drapeauEtNom">
-                                    <img class="drapeau" src=<?= $lien . $matchsPremierTourB[$key]->equipe2->drapeau_equipes ?> alt="">
-                                    <?= $matchsPremierTourB[$key]->equipe2->nom_equipes ?>
-                                </div>
-
+                    <td class="blockEq">
+                        <div class="blockEquipe">
+                            <div class="drapeauEtNom">
+                                <img class="drapeau" src=<?= $lien . $matchsPremierTourB[$key]->equipe1->drapeau_equipes ?> alt="">
+                                <?= $matchsPremierTourB[$key]->equipe1->nom_equipes ?>
                             </div>
-                        </td>
+
+                            <div>
+                                <img class="vs" src="./assets/img/vs.png" alt="">
+                            </div>
+
+                            <div class="drapeauEtNom">
+                                <img class="drapeau" src=<?= $lien . $matchsPremierTourB[$key]->equipe2->drapeau_equipes ?> alt="">
+                                <?= $matchsPremierTourB[$key]->equipe2->nom_equipes ?>
+                            </div>
+
+                        </div>
+                    </td>
 
 
-                        <td>
-                            <form action="index.php" method="POST">
-                                <div>
-                                    <input class="scoreEquipe" type="hidden" name="idMatch" value=<?= $matchsPremierTourA[$key]->idMatch ?>>
-                                    <input class="scoreEquipe" type="number" name="scoreEquipe1" min=0 max=25 required value=<?= $matchsPremierTourA[$key]->scoreEquipe1 ?>>
-                                    <input class="scoreEquipe" type="number" name="scoreEquipe2" min=0 max=25 required value=<?= $matchsPremierTourA[$key]->scoreEquipe2 ?>>
-                                    <input class="btnJouer" type="submit" name="jouerMatch" value="Jouer">
-                                </div>
+                    <td>
+                        <form action="index.php" method="POST">
+                            <div>
+                                <input class="scoreEquipe" type="hidden" name="idMatch" value=<?= $matchsPremierTourA[$key]->idMatch ?>>
+                                <input class="scoreEquipe" type="number" name="scoreEquipe1" min=0 max=25 required value=<?= $matchsPremierTourB[$key]->scoreEquipe1 ?>>
+                                <input class="scoreEquipe" type="number" name="scoreEquipe2" min=0 max=25 required value=<?= $matchsPremierTourB[$key]->scoreEquipe2 ?>>
+                                <input class="btnJouer" type="submit" name="jouerMatch" value="Jouer">
+                            </div>
 
-                            </form>
-                        </td>
+                        </form>
+                    </td>
 
-                    </tr>
-                <?php
-                }
+                </tr>
+            <?php
+            }
 
-                ?>
-            </tbody>
-        </table>
-    <?php
-    }
-
-    ?>
-
+            ?>
+        </tbody>
+    </table>
 
     <!-- BOUTTON PERMETTANT DE RECOMMENCER LE CHAMPIONNAT -->
 
