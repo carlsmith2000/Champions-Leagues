@@ -31,7 +31,23 @@ class ControlerChampionsLeagues extends ModelChampionsLeagues
     public function createMatchs(){
         $this->updateIdMatchPremierTour();
     }
-    public function updateMatchJouer($idMatch, $scoreEquipe1, $scoreEquipe2){
-        return $this->updateMatch($idMatch, $scoreEquipe1, $scoreEquipe2);
+    public function updateMatchJouer($scoreEquipe1, $scoreEquipe2, $idMatch){
+        return $this->updateMatch($scoreEquipe1, $scoreEquipe2, $idMatch);
     }
+
+    public function reinitialiserGroupe(){
+        return $this->reinitialiserGroup();
+    }
+
+    public function reinitialiserMtchId(){
+        return $this->reinitialiserMatchId();
+    }
+    public function testTirageMatch(){
+        return $this->testTirage();
+    }
+
+    public function testForAffMatch(){
+        return $this->testAffiche();
+    }
+    
 }

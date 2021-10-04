@@ -87,16 +87,52 @@ class ModelChampionsLeagues extends dataBase
 
                 if ($match->idGroupe == 1) {
                     $this->updateMatchId($match->id_matchs, $groupeA[$position_1]->id_equipes, $groupeA[$position_2]->id_equipes);
-                }elseif($match->idGroupe == 2){
+                } elseif ($match->idGroupe == 2) {
                     $this->updateMatchId($match->id_matchs, $groupeB[$position_1]->id_equipes, $groupeB[$position_2]->id_equipes);
                 }
             }
         }
     }
 
-    protected function updateMatch($idMatch, $scoreEquipe1, $scoreEquipe2){
+    protected function updateMatch($idMatch, $scoreEquipe1, $scoreEquipe2)
+    {
         $sql = 'UPDATE matchs SET scoreEq1_matchs  = ?, scoreEq2_matchs = ? WHERE id_matchs = ?';
         $stm = $this->getConnectionToBD()->prepare($sql);
         $stm->execute([$scoreEquipe1, $scoreEquipe2, $idMatch]);
     }
+
+    // REINITALISER LE CHAMPIONNAT
+
+    protected function reinitialiserGroup()
+    {
+        $sql = 'UPDATE equipes SET id_groupe = NULL';
+        $stm = $this->getConnectionToBD()->prepare($sql);
+        $stm->execute([]);
+    }
+
+    protected function reinitialiserMatchId()
+    {
+        $sql = 'UPDATE matchs SET idEq1_matchs = NULL, idEq2_matchs = NULL';
+        $stm = $this->getConnectionToBD()->prepare($sql);
+        $stm->execute([]);
+    }
+
+    protected function testTirage(){
+        $sql = 'SELECT *  FROM equipes WHERE id_groupe IS NULL';
+        $stm = $this->getConnectionToBD()->prepare($sql);
+        $stm->execute([]);
+        $stm->fetchAll();
+        return ($stm->rowCount() > 0);
+    }
+
+    protected function testAffiche()
+    {
+        $sql = 'SELECT *  FROM matchs WHERE idEq1_matchs IS NULL OR idEq2_matchs IS NULL';
+        $stm = $this->getConnectionToBD()->prepare($sql);
+        $stm->execute([]);
+        $stm->fetchAll();
+        return ($stm->rowCount() > 0);
+    }
+   
+
 }

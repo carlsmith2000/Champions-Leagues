@@ -13,6 +13,7 @@
         public function getGroupe_A(){
             return $this->getAllGroupe(1);
         }
+
         public function getGroupe_B(){
             return $this->getAllGroupe(2);
         }
@@ -33,3 +34,5 @@
         }
     }
 ?>
+
+<!--  -->

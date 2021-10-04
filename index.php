@@ -19,21 +19,18 @@ $lien = './assets/img/';
     $controlerChampionsL = new ControlerChampionsLeagues();
 
     $allEquipes = $viewChampionsL->afficherEquipes();
-    $controlerChampionsL->createGroupe();
+    // $allMatchs = $viewChampionsL->afficherMatchs();
 
-    $allMatchs = $viewChampionsL->afficherMatchs();
-
-    $controlerChampionsL->createGroupe();
-    $groupeA = $viewChampionsL->getGroupe_A();
-    $groupeB = $viewChampionsL->getGroupe_B();
-
-
-    $controlerChampionsL->createMatchs();
     ?>
+    <!-- AFFICHAGE DE TOUTES LES EQUIPES DU CHAMPIONNAT -->
+
+    <!-- <div class="img-table">
+            
+        </div> -->
     <div>
         <table border="1">
             <tr>
-                <th>Lot #1 <br>1e Tete de Serie</th>
+                <th>Lot #1 <br>1e Tete de Serie </th>
                 <th>Lot #2 <br>2e Tete de Serie</th>
                 <th>Lot #3 <br>3e Tete de Serie</th>
                 <th>Lot #4 <br>4e Tete de Serie</th>
@@ -75,18 +72,39 @@ $lien = './assets/img/';
 
 
 
-    <div>
-        <form action="index.php" method="POST">
-            <input type="submit" value="Lancer Tirage" name="lanceTirage">
-        </form>
-    </div>
-
-
-
     <?php
     if (isset($_POST['lanceTirage'])) {
+        $controlerChampionsL->createGroupe();
+
+        // BOUTTON PERMETTANT DE JOUER UN MATCH
+
+        if (isset($_POST['jouerMatch'])) {
+            $controlerChampionsL->updateMatchJouer($_POST['idMatch'], $_POST['scoreEquipe1'], $_POST['scoreEquipe2']);
+            // echo "<pre>";
+            // print_r($_POST);
+        }
+    }
+
+    if (isset($_POST['resetChamp'])) {
+        $controlerChampionsL->reinitialiserGroupe();
+        $controlerChampionsL->reinitialiserMtchId();
+    }
 
     ?>
+    <?php
+    if (!$controlerChampionsL->testTirageMatch() == true) {
+        $groupeA = $viewChampionsL->getGroupe_A();
+        $groupeB = $viewChampionsL->getGroupe_B();
+    ?>
+        <!-- Boutton Permettant de lancer un tirage -->
+
+
+        <div>
+            <form action="index.php" method="POST">
+                <input type="submit" value="Lancer Tirage" name="lanceTirage" disabled>
+            </form>
+        </div>
+
         <div>
             <table border="1">
                 <thead>
@@ -115,36 +133,56 @@ $lien = './assets/img/';
 
                     <?php
                     }
-
                     ?>
-
                 </tbody>
             </table>
 
         </div>
 
+        <?php
+
+        if ($controlerChampionsL->testForAffMatch() == true) {
+            $controlerChampionsL->createMatchs();
+
+        ?>
+            <div>
+                <form action="index.php" method="POST">
+                    <input type="submit" value="Afficher Matchs" name="afficherMatch">
+                </form>
+            </div>
+        <?php
+        } else {
+        ?>
+            <div>
+                <form action="index.php" method="POST">
+                    <input type="submit" value="Afficher Matchs" name="afficherMatch" disabled>
+                </form>
+            </div>
+        <?php
+        }
+    } else {
+        ?>
+        <!-- Boutton Permettant de lancer un tirage -->
         <div>
             <form action="index.php" method="POST">
-                <input type="submit" value="Afficher Les Matchs" name="afficherMatch">
+                <input type="submit" value="Lancer Tirage" name="lanceTirage">
             </form>
         </div>
-
     <?php
     }
-    $matchsPremierTourA = $viewChampionsL->matchByPhase(1, 'Premier Tour');
-    $matchsPremierTourB = $viewChampionsL->matchByPhase(2, 'Premier Tour');
-
     ?>
 
-
+    <!-- AFFICHAGE DE TOUS LES  MATCHS -->
 
     <?php
-
 
     if (isset($_POST['afficherMatch'])) {
 
-    ?>
+        $matchsPremierTourA = $viewChampionsL->matchByPhase(1, 'Premier Tour');
+        $matchsPremierTourB = $viewChampionsL->matchByPhase(2, 'Premier Tour');
 
+    ?>
+        <!-- LES MATCHS DU GROUPE A -->
         <table>
             <thead>
                 <tr>
@@ -187,8 +225,9 @@ $lien = './assets/img/';
                         <td>
                             <form action="index.php" method="POST">
                                 <div>
-                                    <input class="scoreEquipe" type="number" name="scoreEquipe1" min = 0 max = 25 >
-                                    <input class="scoreEquipe" type="number" name="scoreEquipe2" min= 0 max = 25 >
+                                    <input class="scoreEquipe" type="hidden" name="idMatch" value=<?= $matchsPremierTourA[$key]->idMatch ?>>
+                                    <input class="scoreEquipe" type="number" name="scoreEquipe1" min=0 max=25 required value=<?= $matchsPremierTourA[$key]->scoreEquipe1 ?>>
+                                    <input class="scoreEquipe" type="number" name="scoreEquipe2" min=0 max=25 required value=<?= $matchsPremierTourA[$key]->scoreEquipe2 ?>>
                                     <input class="btnJouer" type="submit" name="jouerMatch" value="Jouer">
                                 </div>
 
@@ -198,16 +237,11 @@ $lien = './assets/img/';
                     </tr>
                 <?php
                 }
-                if (isset($_POST['jouerMatch']) ) {                        
-                    $controlerChampionsL->updateMatchJouer($matchsPremierTourA[2]->idMatch,
-                       $_POST['scoreEquipe1'],
-                       $_POST['scoreEquipe2']
-                    );
-                }
                 ?>
             </tbody>
         </table>
 
+        <!-- LES MATCHS DU GROUPE B -->
 
         <table>
             <thead>
@@ -249,10 +283,11 @@ $lien = './assets/img/';
 
 
                         <td>
-                            <form action="">
+                            <form action="index.php" method="POST">
                                 <div>
-                                    <input class="scoreEquipe" type="number" name="scoreEquipe1" size="2">
-                                    <input class="scoreEquipe" type="number" name="scoreEquipe2" size="2">
+                                    <input class="scoreEquipe" type="hidden" name="idMatch" value=<?= $matchsPremierTourA[$key]->idMatch ?>>
+                                    <input class="scoreEquipe" type="number" name="scoreEquipe1" min=0 max=25 required value=<?= $matchsPremierTourA[$key]->scoreEquipe1 ?>>
+                                    <input class="scoreEquipe" type="number" name="scoreEquipe2" min=0 max=25 required value=<?= $matchsPremierTourA[$key]->scoreEquipe2 ?>>
                                     <input class="btnJouer" type="submit" name="jouerMatch" value="Jouer">
                                 </div>
 
@@ -268,7 +303,21 @@ $lien = './assets/img/';
         </table>
     <?php
     }
+
     ?>
+
+
+    <!-- BOUTTON PERMETTANT DE RECOMMENCER LE CHAMPIONNAT -->
+
+    <div class="btnReset">
+        <form action="index.php" method="POST">
+            <div>
+                <input class="btnJouerR" type="submit" name="resetChamp" value="reset">
+            </div>
+        </form>
+    </div>
+
+
 </body>
 
 </html>
