@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.1.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Sep 30, 2021 at 10:43 AM
--- Server version: 10.4.19-MariaDB
--- PHP Version: 8.0.7
+-- Hôte : 127.0.0.1
+-- Généré le : lun. 04 oct. 2021 à 23:12
+-- Version du serveur :  10.4.17-MariaDB
+-- Version de PHP : 8.0.0
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,14 +18,16 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `champions-league`
+-- Base de données : `champions-league`
 --
+
 CREATE DATABASE `champions-league`;
 USE `champions-league`;
+
 -- --------------------------------------------------------
 
 --
--- Table structure for table `equipes`
+-- Structure de la table `equipes`
 --
 
 CREATE TABLE `equipes` (
@@ -46,23 +48,23 @@ CREATE TABLE `equipes` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `equipes`
+-- Déchargement des données de la table `equipes`
 --
 
 INSERT INTO `equipes` (`id_equipes`, `nom_equipes`, `drapeau_equipes`, `butEnc_equipes`, `butMarq_equipes`, `point_equipes`, `diffBut_equipes`, `matchNull_equipes`, `id_groupe`, `id_lots_eq`, `MatchGagne_equipes`, `MatchPerdu_equipes`, `matchJouer_equipe`, `testQalifie`) VALUES
 (1, 'Brésil', 'bresil.svg', NULL, NULL, 0, NULL, NULL, 2, 1, 0, 0, 0, 0),
-(2, 'France', 'france.svg', NULL, NULL, 0, NULL, NULL, 2, 2, 0, 0, 0, 0),
+(2, 'France', 'france.svg', NULL, NULL, 0, NULL, NULL, 1, 2, 0, 0, 0, 0),
 (3, 'Espagne', 'espagne.svg', NULL, NULL, 0, NULL, NULL, 1, 3, 0, 0, 0, 0),
 (4, 'Portugal', 'portugal.svg', NULL, NULL, 0, NULL, NULL, 2, 4, 0, 0, 0, 0),
 (5, 'Argentine', 'argentine.svg', NULL, NULL, 0, NULL, NULL, 1, 1, 0, 0, 0, 0),
-(6, 'Italie', 'italie.svg', NULL, NULL, 0, NULL, NULL, 1, 2, 0, 0, 0, 0),
+(6, 'Italie', 'italie.svg', NULL, NULL, 0, NULL, NULL, 2, 2, 0, 0, 0, 0),
 (7, 'Allemagne', 'allemagne.svg', NULL, NULL, 0, NULL, NULL, 2, 3, 0, 0, 0, 0),
 (8, 'Haïti', 'haiti.svg', NULL, NULL, 0, NULL, NULL, 1, 4, 0, 0, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `groupe`
+-- Structure de la table `groupe`
 --
 
 CREATE TABLE `groupe` (
@@ -71,7 +73,7 @@ CREATE TABLE `groupe` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `groupe`
+-- Déchargement des données de la table `groupe`
 --
 
 INSERT INTO `groupe` (`id_groupe`, `nom_groupe`) VALUES
@@ -81,7 +83,7 @@ INSERT INTO `groupe` (`id_groupe`, `nom_groupe`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `jouer`
+-- Structure de la table `jouer`
 --
 
 CREATE TABLE `jouer` (
@@ -92,7 +94,7 @@ CREATE TABLE `jouer` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `lots_eq`
+-- Structure de la table `lots_eq`
 --
 
 CREATE TABLE `lots_eq` (
@@ -100,7 +102,7 @@ CREATE TABLE `lots_eq` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `lots_eq`
+-- Déchargement des données de la table `lots_eq`
 --
 
 INSERT INTO `lots_eq` (`id_lots_eq`) VALUES
@@ -112,7 +114,7 @@ INSERT INTO `lots_eq` (`id_lots_eq`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `matchs`
+-- Structure de la table `matchs`
 --
 
 CREATE TABLE `matchs` (
@@ -133,33 +135,33 @@ CREATE TABLE `matchs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
--- Dumping data for table `matchs`
+-- Déchargement des données de la table `matchs`
 --
 
 INSERT INTO `matchs` (`id_matchs`, `idGroupe`, `idEq1_matchs`, `idEq2_matchs`, `scoreEq1_matchs`, `scoreEq2_matchs`, `siJouer_matchs`, `phase_matchs`, `position_eq_1`, `position_eq_2`, `eq_p`, `eq_g`, `matchs_termine`, `match_num`) VALUES
-(1, 1, 5, 6, NULL, NULL, 0, 'Premier Tour', 1, 2, 0, 0, 0, 1),
-(2, 1, 3, 8, NULL, NULL, 0, 'Premier Tour', 3, 4, 0, 0, 0, 3),
-(3, 1, 5, 3, NULL, NULL, 0, 'Premier Tour', 1, 3, 0, 0, 0, 5),
-(4, 1, 6, 8, NULL, NULL, 0, 'Premier Tour', 2, 4, 0, 0, 0, 7),
-(5, 1, 5, 8, NULL, NULL, 0, 'Premier Tour', 1, 4, 0, 0, 0, 9),
-(6, 1, 6, 3, NULL, NULL, 0, 'Premier Tour', 2, 3, 0, 0, 0, 11),
-(7, 2, 1, 2, NULL, NULL, 0, 'Premier Tour', 1, 2, 0, 0, 0, 2),
+(1, 1, 5, 2, 2, 1, 0, 'Premier Tour', 1, 2, 0, 0, 0, 1),
+(2, 1, 3, 8, 3, 2, 0, 'Premier Tour', 3, 4, 0, 0, 0, 3),
+(3, 1, 5, 3, 1, 0, 0, 'Premier Tour', 1, 3, 0, 0, 0, 5),
+(4, 1, 2, 8, 1, 0, 0, 'Premier Tour', 2, 4, 0, 0, 0, 7),
+(5, 1, 5, 8, 0, 2, 0, 'Premier Tour', 1, 4, 0, 0, 0, 9),
+(6, 1, 2, 3, 2, 2, 0, 'Premier Tour', 2, 3, 0, 0, 0, 11),
+(7, 2, 1, 6, NULL, NULL, 0, 'Premier Tour', 1, 2, 0, 0, 0, 2),
 (8, 2, 7, 4, NULL, NULL, 0, 'Premier Tour', 3, 4, 0, 0, 0, 4),
 (9, 2, 1, 7, NULL, NULL, 0, 'Premier Tour', 1, 3, 0, 0, 0, 6),
-(10, 2, 2, 4, NULL, NULL, 0, 'Premier Tour', 2, 4, 0, 0, 0, 8),
+(10, 2, 6, 4, NULL, NULL, 0, 'Premier Tour', 2, 4, 0, 0, 0, 8),
 (11, 2, 1, 4, NULL, NULL, 0, 'Premier Tour', 1, 4, 0, 0, 0, 10),
-(12, 2, 2, 7, NULL, NULL, 0, 'Premier Tour', 2, 3, 0, 0, 0, 12),
+(12, 2, 6, 7, NULL, NULL, 0, 'Premier Tour', 2, 3, 0, 0, 0, 12),
 (13, 0, NULL, NULL, NULL, NULL, 0, 'Demi Finale', 1, 2, 0, 0, 0, 13),
 (14, 0, NULL, NULL, NULL, NULL, 0, 'Demi Finale', 1, 2, 0, 0, 0, 14),
 (15, 0, NULL, NULL, NULL, NULL, 0, 'Petite Finale', 2, 2, 0, 0, 0, 15),
 (16, 0, NULL, NULL, NULL, NULL, 0, 'Grande Finale', 1, 1, 0, 0, 0, 16);
 
 --
--- Indexes for dumped tables
+-- Index pour les tables déchargées
 --
 
 --
--- Indexes for table `equipes`
+-- Index pour la table `equipes`
 --
 ALTER TABLE `equipes`
   ADD PRIMARY KEY (`id_equipes`),
@@ -167,77 +169,77 @@ ALTER TABLE `equipes`
   ADD KEY `FK_equipes_id_lots_eq` (`id_lots_eq`);
 
 --
--- Indexes for table `groupe`
+-- Index pour la table `groupe`
 --
 ALTER TABLE `groupe`
   ADD PRIMARY KEY (`id_groupe`);
 
 --
--- Indexes for table `jouer`
+-- Index pour la table `jouer`
 --
 ALTER TABLE `jouer`
   ADD PRIMARY KEY (`id_matchs`,`id_equipes`),
   ADD KEY `FK_jouer_id_equipes` (`id_equipes`);
 
 --
--- Indexes for table `lots_eq`
+-- Index pour la table `lots_eq`
 --
 ALTER TABLE `lots_eq`
   ADD PRIMARY KEY (`id_lots_eq`);
 
 --
--- Indexes for table `matchs`
+-- Index pour la table `matchs`
 --
 ALTER TABLE `matchs`
   ADD PRIMARY KEY (`id_matchs`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT pour les tables déchargées
 --
 
 --
--- AUTO_INCREMENT for table `equipes`
+-- AUTO_INCREMENT pour la table `equipes`
 --
 ALTER TABLE `equipes`
   MODIFY `id_equipes` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
--- AUTO_INCREMENT for table `groupe`
+-- AUTO_INCREMENT pour la table `groupe`
 --
 ALTER TABLE `groupe`
   MODIFY `id_groupe` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
--- AUTO_INCREMENT for table `jouer`
+-- AUTO_INCREMENT pour la table `jouer`
 --
 ALTER TABLE `jouer`
   MODIFY `id_matchs` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `lots_eq`
+-- AUTO_INCREMENT pour la table `lots_eq`
 --
 ALTER TABLE `lots_eq`
   MODIFY `id_lots_eq` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `matchs`
+-- AUTO_INCREMENT pour la table `matchs`
 --
 ALTER TABLE `matchs`
   MODIFY `id_matchs` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
--- Constraints for dumped tables
+-- Contraintes pour les tables déchargées
 --
 
 --
--- Constraints for table `equipes`
+-- Contraintes pour la table `equipes`
 --
 ALTER TABLE `equipes`
   ADD CONSTRAINT `FK_equipes_id_groupe` FOREIGN KEY (`id_groupe`) REFERENCES `groupe` (`id_groupe`),
   ADD CONSTRAINT `FK_equipes_id_lots_eq` FOREIGN KEY (`id_lots_eq`) REFERENCES `lots_eq` (`id_lots_eq`);
 
 --
--- Constraints for table `jouer`
+-- Contraintes pour la table `jouer`
 --
 ALTER TABLE `jouer`
   ADD CONSTRAINT `FK_jouer_id_equipes` FOREIGN KEY (`id_equipes`) REFERENCES `equipes` (`id_equipes`),
