@@ -7,7 +7,6 @@
  */
 class TeamModel extends Database
 {
-
     //RÉCUPÉRATION DES DONNÉES
     protected function getTeams()
     {
@@ -68,7 +67,7 @@ class TeamModel extends Database
         $sql = 'SELECT * FROM team WHERE idGroupe IS NULL;';
         $stmt = $this->getConnection()->prepare($sql);
         $stmt->execute();
-        return (count($stmt->fetchAll()) > 0);
+        return (count($stmt->fetchAll())>0);
     }
 
 
@@ -99,6 +98,12 @@ class TeamModel extends Database
     }
 
     //MODIFICATION DE DONNÉES
+    protected function setTeamsIdGroupToNull()
+    {
+        $sql = 'UPDATE team SET idGroupe = NULL;';
+        $stmt = $this->getConnection()->prepare($sql);
+        $stmt->execute();
+    }
     protected function setTeamsIdGroupById($idGroupe, $id)
     {
         $sql = 'UPDATE team SET idGroupe = ? WHERE id = ?;';
@@ -106,12 +111,6 @@ class TeamModel extends Database
         $stmt->execute([$idGroupe, $id]);
     }
 
-    protected function setTeamsIdGroupToNull()
-    {
-        $sql = 'UPDATE team SET idGroupe = NULL;';
-        $stmt = $this->getConnection()->prepare($sql);
-        $stmt->execute();
-    }
 
     protected function updateGameTeams($gamePlayedTeam, $winTeam, $tieTeam, $loseTeam, $scoreForTeam, $scoreAgainstTeam, $diffScoreTeam, $pointsTeam, $qualifie, $idTeam)
     {
