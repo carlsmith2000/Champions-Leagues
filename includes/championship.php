@@ -21,7 +21,7 @@ $gameControlleur = new GameController();
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link type="text/css" rel="stylesheet" href="../css/championship.css">
-    <title>Calendrier | Coupe 3ème Infos</title>
+    <title>Calendrier | Coupe Inuka</title>
 </head>
 
 <body>
