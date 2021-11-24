@@ -1,3 +1,4 @@
+
 <?php
 require_once('./classes/database/Database.class.php');
 require_once('./classes/equipes/TeamModel.class.php');
@@ -25,5 +26,3 @@ $imagesLink = './css/images/';
     </section>
 
 </body>
-
-</html>
