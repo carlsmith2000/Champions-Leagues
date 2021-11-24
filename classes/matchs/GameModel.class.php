@@ -139,6 +139,14 @@ class GameModel extends Database
         $stmt->execute();
     }
 
+    
+    protected function getGameInOrder($numberGame)
+    {
+        $sql = 'SELECT * FROM game WHERE numero = ?';
+        $stmt = $this->getConnection()->prepare($sql);
+        $stmt->execute([$numberGame]);
+        return $stmt->fetch();
+    }
     protected function updateGameTeamScore($idGame, $scoreFirstTeam, $scoreSecondTeam, $idTeamWin, $idTeamLose, $pen_1, $pen_2)
     {
         $sql = 'UPDATE game SET 
@@ -167,14 +175,6 @@ class GameModel extends Database
                 $this->activeGame($nextGame->id);
             }
         }
-    }
-
-    protected function getGameInOrder($numberGame)
-    {
-        $sql = 'SELECT * FROM game WHERE numero = ?';
-        $stmt = $this->getConnection()->prepare($sql);
-        $stmt->execute([$numberGame]);
-        return $stmt->fetch();
     }
 
     protected function activeGame($id_Game)
