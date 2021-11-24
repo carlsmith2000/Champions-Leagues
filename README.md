@@ -3,7 +3,7 @@
 > ## Membres Du Projets :
 
 - Wenchy Price CADET
-- David Junior PIERREVIL
+- David Junior PIEREVILUS
 - Carl Smith ETIENNE
 
 ---
