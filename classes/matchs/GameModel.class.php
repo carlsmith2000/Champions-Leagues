@@ -177,10 +177,10 @@ class GameModel extends Database
         return $stmt->fetch();
     }
 
-    protected function activeGame($idGame)
+    protected function activeGame($id_Game)
     {
         $sql = 'UPDATE game SET peutJouer = true WHERE id = ?';
         $stmt = $this->getConnection()->prepare($sql);
-        $stmt->execute([$idGame]);
+        $stmt->execute([$id_Game]);
     }
 }
