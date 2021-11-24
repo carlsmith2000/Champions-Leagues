@@ -98,7 +98,7 @@ class TeamModel extends Database
         return $stmt->fetchAll();
     }
 
-    //MODIFICATION DES DONNÉES
+    //MODIFICATION DE DONNÉES
     protected function setTeamsIdGroupById($idGroupe, $id)
     {
         $sql = 'UPDATE team SET idGroupe = ? WHERE id = ?;';
