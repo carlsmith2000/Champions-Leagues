@@ -12,7 +12,6 @@ class Database
     protected function getConnection()
     {
         $this->dsn = 'mysql:host=' . $this->HOST_NAME . ';dbname=' . $this->DB_NAME;
-
         try {
             $this->connection = new PDO($this->dsn, $this->USER_NAME, $this->PASSWORD, $this->options);
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
