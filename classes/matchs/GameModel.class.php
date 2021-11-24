@@ -49,6 +49,14 @@ class GameModel extends Database
         return ($stmt->rowCount() > 0);
     }
 
+    
+    protected function getGamesByPhase($phase)
+    {
+        $sql = 'SELECT * FROM game WHERE phase LIKE ?';
+        $stmt = $this->getConnection()->prepare($sql);
+        $stmt->execute([$phase]);
+        return $stmt->fetchAll();
+    }
     protected function getGamesByPhaseGroups($idGroup, $phase)
     {
         if ($idGroup == 1) {
@@ -78,28 +86,21 @@ class GameModel extends Database
             return $stmt->fetchAll();
         }
     }
-
-    protected function getGamesByPhase($phase)
-    {
-        $sql = 'SELECT * FROM game WHERE phase LIKE ?';
-        $stmt = $this->getConnection()->prepare($sql);
-        $stmt->execute([$phase]);
-        return $stmt->fetchAll();
-    }
-
-    protected function getNextGamesByNumber($previousGameNumber)
-    {
-        $sql = 'SELECT * FROM game WHERE numero = (? + 1)';
-        $stmt = $this->getConnection()->prepare($sql);
-        $stmt->execute([$previousGameNumber]);
-        return $stmt->fetch();
-    }
-
+    
+    
     protected function getGamesById($idGame)
     {
         $sql = 'SELECT * FROM game WHERE id = ?';
         $stmt = $this->getConnection()->prepare($sql);
         $stmt->execute([$idGame]);
+        return $stmt->fetch();
+    }
+    
+    protected function getNextGamesByNumber($previousGameNumber)
+    {
+        $sql = 'SELECT * FROM game WHERE numero = (? + 1)';
+        $stmt = $this->getConnection()->prepare($sql);
+        $stmt->execute([$previousGameNumber]);
         return $stmt->fetch();
     }
 
